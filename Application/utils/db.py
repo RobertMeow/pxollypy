@@ -1,7 +1,7 @@
 import sqlite3
 
 SCHEMA = """
-         CREATE TABLE conversations (peer_id INT, local_id TEXT);
+         CREATE TABLE conversations (peer_id INT, local_id TEXT, upeer_id INT);
          CREATE TABLE config (confirmation_code TEXT NOT NULL DEFAULT '',
                               token TEXT NOT NULL DEFAULT '0',
                               pxolly_token TEXT NOT NULL DEFAULT '0',
@@ -70,7 +70,7 @@ class ControlDatabase:
         if update or self.create_tables():
             token, pxolly_token, code, secret_key = input("Токен: "), input("Токен от @pxolly: "), input("confirmation code: "), input("secret key: ")
             self.save(f"UPDATE config SET token = '{token}', confirmation_code = '{code}', secret_key = '{secret_key}', pxolly_token = '{pxolly_token}'")
-            # TODO: да, можно было сделать через безопасный режим (?), знаю, ацтань.
+            # TODO: да, можно было сделать через безопасный режим (?), знаю, ацтань
 
     def get_config(self):
         return self.receives("SELECT token, pxolly_token, confirmation_code, secret_key FROM config")[0]

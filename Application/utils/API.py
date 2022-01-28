@@ -31,7 +31,7 @@ class API:
         self.owner_id = self.method('users.get')[0]['id']
 
     def method(self, name, p=None):
-        result = self.http(method=False, url=self.url_api.format(name), data=(self.data if p is None else p | self.data)).json()
+        result = self.http(method=False, url=self.url_api.format(name), data=(self.data if p is None else {**p, **self.data})).json()
         if 'error' in result:
             if result['error']['error_code'] == 14:
                 raise Captcha(result['error']['captcha_img'])
@@ -47,7 +47,12 @@ class API:
         try:
             if method:
                 return self.session.get(**kwargs)
-            else:
-                return self.session.post(**kwargs)
+            return self.session.post(**kwargs)
         except requests.exceptions.RequestException as ex:
             print('Error request:', ex)
+
+    def get_peer_id(self, text, cmi, date, from_id):
+        response = self.method("messages.search", {"q": text, "count": 5})
+        for t in response['items']:
+            if t['from_id'] == from_id and t['conversation_message_id'] == cmi and t['date'] == date and t['text'] == text:
+                return t['peer_id']
