@@ -1,3 +1,4 @@
+import os
 import sqlite3
 
 SCHEMA = """
@@ -12,7 +13,11 @@ class ControlDatabase:
     __slots__ = ['con', 'sql', 'API', 'token', 'pxolly_token', 'code', 'secret_key']
 
     def __init__(self):
-        self.con = sqlite3.connect('Application/database/warp_database.db', check_same_thread=False)
+        try:
+            self.con = sqlite3.connect('Application/database/warp_database.db', check_same_thread=False)
+        except
+            os.system('mkdir Application/database')
+            self.con = sqlite3.connect('Application/database/warp_database.db', check_same_thread=False)
         self.sql = self.con.cursor()
         self.API = None
 
