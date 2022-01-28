@@ -26,12 +26,12 @@ class API:
         self.data = {'access_token': self.token, "v": self.v, }
 
         self.kwargs = ()
-        self.url_api = "https://api.vk.me/method/{}"
+        self.url_api = "https://api.vk.com/method/{}"
 
         self.owner_id = self.method('users.get')[0]['id']
 
     def method(self, name, p=None):
-        result = self.http(method=False, url=self.url_api.format(name), data=(self.data if p is None else {**p, **self.data})).json()
+        result = self.http(method=False, url=self.url_api.format(name), data=(self.data if p is None else {**self.data, **p})).json()
         if 'error' in result:
             if result['error']['error_code'] == 14:
                 raise Captcha(result['error']['captcha_img'])
