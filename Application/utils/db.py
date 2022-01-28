@@ -2,7 +2,7 @@ import os
 import sqlite3
 
 SCHEMA = """
-         CREATE TABLE conversations (peer_id INT, local_id TEXT, upeer_id INT);
+         CREATE TABLE conversations (peer_id INT, local_id TEXT);
          CREATE TABLE config (confirmation_code TEXT NOT NULL DEFAULT '',
                               token TEXT NOT NULL DEFAULT '0',
                               pxolly_token TEXT NOT NULL DEFAULT '0',
