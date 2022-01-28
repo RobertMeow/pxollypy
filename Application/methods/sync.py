@@ -13,4 +13,4 @@ def sync(**kwargs):
         text, cmi, date, from_id = event_msg['text'], event_msg['conversation_message_id'], event_msg['date'], event_msg['from_id']
         peer_id = kwargs['vk'].get_peer_id(text, cmi, date, from_id)
         db.save(f"INSERT INTO conversations (peer_id, local_id) VALUES ({peer_id}, '{event_obj['chat_id']}')")
-    return kwargs['event']['success']
+    return event_obj['success']
