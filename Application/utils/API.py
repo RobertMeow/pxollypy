@@ -14,14 +14,14 @@ class Captcha(Exception):
 
 
 class API:
-    __slots__ = ['session', 'app_id', 'v', 'token', 'data', 'owner_id', 'kwargs', 'url_api']
+    __slots__ = ['session', 'v', 'token', 'data', 'owner_id', 'kwargs', 'url_api']
 
-    def __init__(self, token, app_id=6146827, v="5.162", proxies=None):
+    def __init__(self, token, v="5.161", proxies=None):
         self.session = requests.Session()
         self.session.headers.update({'User-Agent': 'API'})
         if proxies is not None:
             self.session.proxies.update(proxies)
-        self.app_id, self.v = app_id, v
+        self.v = v
         self.token = token
         self.data = {'access_token': self.token, "v": self.v, }
 
