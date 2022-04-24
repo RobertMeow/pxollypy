@@ -17,7 +17,7 @@ class ControlDatabase:
             self.con = sqlite3.connect('Application/database/warp_database.db', check_same_thread=False)
         except sqlite3.OperationalError:
             os.system('mkdir Application/database')
-            self.con = sqlite3.connect('pxollypy/Application/database/warp_database.db', check_same_thread=False)
+            self.con = sqlite3.connect('Application/database/warp_database.db', check_same_thread=False)
         self.sql = self.con.cursor()
         self.API = None
 
