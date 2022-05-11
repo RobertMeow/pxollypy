@@ -81,4 +81,5 @@ class ControlDatabase:
         return self.receives("SELECT token, pxolly_token, confirmation_code, secret_key FROM config")[0]
 
     def get_chat_uid(self, chat_id):
-        return self.receive(f"SELECT peer_id FROM conversations WHERE local_id = '{chat_id}'")
+        chat_id = self.receive(f"SELECT peer_id FROM conversations WHERE local_id = '{chat_id}'")
+        return chat_id if chat_id < 2000000000 else chat_id-2000000000
