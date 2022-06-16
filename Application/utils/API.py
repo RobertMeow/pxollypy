@@ -3,9 +3,10 @@ import time
 
 
 class ErrorVK(Exception):
-    def __init__(self, code, error):
+    def __init__(self, code, error, full):
         self.code = code
         self.error = error
+        self.full = full
 
 
 class Captcha(Exception):
@@ -38,7 +39,7 @@ class API:
             else:
                 if result['error']['error_code'] == 6:
                     time.sleep(0.4)
-                raise ErrorVK(result['error']['error_code'], result['error']['error_msg'])
+                raise ErrorVK(result['error']['error_code'], result['error']['error_msg'], result)
         else:
             return result['response']
 
