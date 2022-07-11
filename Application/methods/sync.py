@@ -7,7 +7,6 @@ def sync(**kwargs):
     event_obj, event_msg = kwargs['event']['object'], kwargs['event']['object']['message']
 
     if db.receive(f"SELECT COUNT(*) FROM conversations WHERE local_id = '{event_obj['chat_id']}'"):
-        # db.save(f"UPDATE conversations SET peer_id = {event_obj['chat_uid']} WHERE local_id = '{event_obj['chat_id']}'")
         return '5'
     else:
         text, cmi, date, from_id = event_msg['text'], event_msg['conversation_message_id'], event_msg['date'], event_msg['from_id']
