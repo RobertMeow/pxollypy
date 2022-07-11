@@ -23,7 +23,7 @@ class ControlDatabase:
 
         self.update_config(update=False)
         config = self.get_config()
-        self.token,  self.pxolly_token,  self.code,  self.secret_key = config[0], config[1], config[2], config[3]
+        self.token, self.pxolly_token, self.code, self.secret_key = config[0], config[1], config[2], config[3]
 
     def receive(self, *args):
         """
@@ -73,8 +73,8 @@ class ControlDatabase:
         :return: None
         """
         if update or self.create_tables():
-            token, pxolly_token, code, secret_key = input("Токен: "), input("Токен от @pxolly: "), input("confirmation code: "), input("secret key: ")
-            self.save(f"UPDATE config SET token = '{token}', confirmation_code = '{code}', secret_key = '{secret_key}', pxolly_token = '{pxolly_token}'")
+            self.token, self.pxolly_token, self.code, self.secret_key = input("Токен: "), input("Токен от @pxolly: "), input("confirmation code: "), input("secret key: ")
+            self.save(f"UPDATE config SET token = '{self.token}', confirmation_code = '{self.code}', secret_key = '{self.secret_key}', pxolly_token = '{self.pxolly_token}'")
             # TODO: да, можно было сделать через безопасный режим (?), знаю, ацтань
 
     def get_config(self):
